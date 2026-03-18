@@ -334,9 +334,9 @@ function AppContent() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 pb-20">
+    <div className="flex flex-col min-h-screen bg-gray-50 pb-[calc(80px+env(safe-area-inset-bottom))]">
       {/* Header */}
-      <header className="bg-forest-green text-white pt-12 pb-6 px-6 rounded-b-[32px] shadow-lg">
+      <header className="bg-forest-green text-white pt-[calc(1.5rem+env(safe-area-inset-top))] pb-6 px-6 rounded-b-[32px] shadow-lg">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-2">
             <Leaf className="text-tea-green fill-tea-green" size={28} />
@@ -432,7 +432,7 @@ function AppContent() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-100 px-6 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-40">
         <NavButton 
           active={currentView === 'dashboard'} 
           onClick={() => setCurrentView('dashboard')}
@@ -486,7 +486,7 @@ function NavButton({ active, onClick, icon, label }: { active: boolean, onClick:
     <button 
       onClick={onClick}
       className={cn(
-        "flex flex-col items-center gap-1 transition-colors duration-200",
+        "flex flex-col items-center gap-1 transition-all duration-200 active:scale-90",
         active ? "text-forest-green" : "text-gray-400"
       )}
     >
@@ -532,9 +532,9 @@ function Dashboard({ stats, entries, onDelete, onAddClick }: { key?: string, sta
             <h2 className="text-lg font-bold text-gray-800">Today's Entries</h2>
             <button 
               onClick={onAddClick}
-              className="bg-forest-green text-white p-2 rounded-full shadow-lg active:scale-95 transition-transform"
+              className="bg-forest-green text-white p-3 rounded-2xl shadow-lg active:scale-90 transition-all hover:shadow-forest-green/20"
             >
-              <Plus size={24} />
+              <Plus size={28} />
             </button>
           </div>
 
@@ -1548,6 +1548,7 @@ function AddEntryModal({ entry, onClose, onSave, uid }: { entry?: HarvestEntry, 
                 <div key={idx} className="relative group">
                   <input 
                     type="number" 
+                    inputMode="decimal"
                     step="0.1"
                     required
                     value={bag}
@@ -1573,6 +1574,7 @@ function AddEntryModal({ entry, onClose, onSave, uid }: { entry?: HarvestEntry, 
             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Rate per Kg (KES)</label>
             <input 
               type="number" 
+              inputMode="decimal"
               required
               value={ratePerKg}
               onChange={(e) => setRatePerKg(e.target.value)}
