@@ -1,0 +1,5 @@
+{
+  "name": "Limo Tea Harvester",
+  "description": "An offline-first mobile application for tea harvesting management, featuring worker tracking, weight calculations, and pay reporting.",
+  "requestFramePermissions": []
+}

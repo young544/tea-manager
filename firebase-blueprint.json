@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "HarvestEntry": {
+      "title": "Harvest Entry",
+      "description": "A record of tea harvested by a worker",
+      "type": "object",
+      "properties": {
+        "workerName": {
+          "type": "string",
+          "description": "Name of the worker"
+        },
+        "bags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "weight": { "type": "number" }
+            }
+          },
+          "description": "List of bags weighed"
+        },
+        "totalKg": {
+          "type": "number",
+          "description": "Total weight in kilograms"
+        },
+        "ratePerKg": {
+          "type": "number",
+          "description": "Payment rate per kilogram"
+        },
+        "totalPay": {
+          "type": "number",
+          "description": "Total payout calculated"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of harvest"
+        },
+        "timestamp": {
+          "type": "integer",
+          "description": "Unix timestamp for sorting"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["paid", "unpaid"],
+          "description": "Payment status"
+        },
+        "uid": {
+          "type": "string",
+          "description": "User ID of the owner"
+        }
+      },
+      "required": ["workerName", "bags", "totalKg", "ratePerKg", "totalPay", "date", "timestamp", "status", "uid"]
+    }
+  },
+  "firestore": {
+    "/harvests/{harvestId}": {
+      "schema": "HarvestEntry",
+      "description": "Collection of harvest records"
+    }
+  }
+}
